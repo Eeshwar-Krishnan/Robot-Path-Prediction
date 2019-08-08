@@ -1,0 +1,4 @@
+Path 0 Curve Values: 1F, 1S
+Path 1 Curve Values: 1F, 1S
+Path 2 Curve Values: 3.999998F, 1S
+Path 3 Curve Values: 1F, 1S
