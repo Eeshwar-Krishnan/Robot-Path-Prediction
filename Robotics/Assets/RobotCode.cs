@@ -43,7 +43,7 @@ public class RobotCode : MonoBehaviour {
             if (Physics.SphereCast(transform.position, 1f, transform.forward, out hit, Mathf.Infinity))
             {
                // Debug.Log(hit.transform.tag);
-                if (hit.transform.CompareTag("Wall") && hit.distance < Vector3.Distance(transform.position, line.transform.position))
+                if (hit.transform.CompareTag("Wall") && hit.distance < Vector3.Distance(transform.position, line.transform.position) && line.isConfig)
                 {
                     //Debug.Log(hit.distance + " " + Vector3.Distance(transform.position, line.transform.position));
                     line.changeRadius(0.1f);
@@ -93,8 +93,8 @@ public class RobotCode : MonoBehaviour {
         }
         timer += Time.deltaTime;
         if (timer > 0.1f && moving) {
-            //temp = Instantiate(mini, transform.position, Quaternion.identity);
-            temp.name = (number+totalNumObjects).ToString();
+            temp = Instantiate(mini, transform.position, Quaternion.identity);
+            //temp.name = (number+totalNumObjects).ToString();
             number++;
             //writer.WriteLine("Coordinate " + number + ": " + new Vector2(temp.transform.position.z, temp.transform.position.x));
             timer = 0f;
@@ -102,7 +102,7 @@ public class RobotCode : MonoBehaviour {
         totalDistanceTraveled += Vector3.Distance(lastPosition, transform.position);
         lastPosition = transform.position;
         if (Math.Abs(transform.position.x - line.transform.position.x) < 0.5f) {
-            Debug.Log(transform.position.x);
+            Debug.Log(transform.position.z);
         }
 	}
 

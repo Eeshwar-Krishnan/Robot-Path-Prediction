@@ -6,6 +6,7 @@ public class Line : MonoBehaviour {
     public float radiusModS, radiusModF;
     public bool strafeAdjust;
     public bool backUp;
+    public bool isConfig;
 	// Use this for initialization
 	void Start () {
         if (backUp) {
