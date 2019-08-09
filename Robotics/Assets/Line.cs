@@ -5,8 +5,13 @@ using UnityEngine;
 public class Line : MonoBehaviour {
     public float radiusModS, radiusModF;
     public bool strafeAdjust;
+    public bool backUp;
 	// Use this for initialization
-	void Start () {}
+	void Start () {
+        if (backUp) {
+            gameObject.GetComponent<Renderer>().material.color = Color.red;
+        }
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -18,7 +23,7 @@ public class Line : MonoBehaviour {
     }
 
     public float getRotation(Vector2 position) {
-        return getAngle(new Vector2((transform.position.z - position.y) * radiusModS, (transform.position.x - position.x) * radiusModF));
+        return (getAngle(new Vector2((transform.position.z - position.y) * radiusModS, (transform.position.x - position.x) * radiusModF))) + (backUp ? 180 : 0);
     }
 
     private float getAngle(Vector2 to) {
@@ -33,5 +38,9 @@ public class Line : MonoBehaviour {
         else {
             radiusModF += amount;
         }
+    }
+
+    public float getSpeedMod() {
+        return backUp ? -1 : 1;
     }
 }

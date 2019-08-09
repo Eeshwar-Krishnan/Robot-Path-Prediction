@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Line
   - Wall
+  - MiniMarker
   layers:
   - Default
   - TransparentFX
