@@ -20,7 +20,7 @@ public class Line : MonoBehaviour {
     }
 
     public bool isFinishedLine(Vector2 position) {
-        return Vector2.Distance(position, new Vector2(transform.position.x, transform.position.z)) < 0.1f;
+        return Vector2.Distance(position, new Vector2(transform.position.x, transform.position.z)) < 0.5f;
     }
 
     public float getRotation(Vector2 position) {
@@ -28,7 +28,9 @@ public class Line : MonoBehaviour {
     }
 
     private float getAngle(Vector2 to) {
-        return Mathf.Rad2Deg * Mathf.Atan2(to.y, to.x);
+        float ang = Mathf.Rad2Deg * Mathf.Atan2(to.y, to.x);
+        ang = Mathf.Abs((ang < 0 ? 360 : 0) - Mathf.Abs(ang));
+        return ang;
     }
 
     public void changeRadius(float amount) {
