@@ -33,8 +33,22 @@ public class RobotCode : MonoBehaviour {
 	void Update () {
         if (moving)
         {
+            timer += Time.deltaTime;
+            //if (timer > 0.1f && moving) {
+            temp = Instantiate(mini, transform.position, Quaternion.identity);
+            //temp.name = (number+totalNumObjects).ToString();
+            number++;
+            //writer.WriteLine("Coordinate " + number + ": " + new Vector2(temp.transform.position.z, temp.transform.position.x));
+            timer = 0f;
+            //}
             transform.Translate(0, 0, speed * line.getSpeedMod());
             transform.eulerAngles = new Vector3(0f, line.getRotation(new Vector2(transform.position.x, transform.position.z)), 0f);
+            RaycastHit hit;
+            if (Physics.SphereCast(transform.position, 1f, transform.forward, out hit, Mathf.Infinity)) {
+                if (hit.transform.CompareTag("Wall") && hit.distance < Vector3.Distance(transform.position, line.transform.position) && line.isConfig) {
+                    line.changeRadius(0.1f);
+                }
+            }
         }
         if (configuring) {
             moving = false;
@@ -90,14 +104,6 @@ public class RobotCode : MonoBehaviour {
                     ended = true;
                 }
             }
-        }
-        timer += Time.deltaTime;
-        if (timer > 0.1f && moving) {
-            temp = Instantiate(mini, transform.position, Quaternion.identity);
-            //temp.name = (number+totalNumObjects).ToString();
-            number++;
-            //writer.WriteLine("Coordinate " + number + ": " + new Vector2(temp.transform.position.z, temp.transform.position.x));
-            timer = 0f;
         }
         totalDistanceTraveled += Vector3.Distance(lastPosition, transform.position);
         lastPosition = transform.position;

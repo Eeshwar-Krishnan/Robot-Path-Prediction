@@ -35,13 +35,27 @@ public class Line : MonoBehaviour {
         if (strafeAdjust)
         {
             radiusModS += amount;
+            if (radiusModS >= 50) {
+                radiusModS = 1;
+                strafeAdjust = false;
+            }
         }
         else {
             radiusModF += amount;
+            if (radiusModF >= 50)
+            {
+                radiusModF = 1;
+                strafeAdjust = true;
+            }
         }
     }
 
     public float getSpeedMod() {
         return backUp ? -1 : 1;
+    }
+
+    public float getAdjustments()
+    {
+        return strafeAdjust ? radiusModS : radiusModF;
     }
 }
